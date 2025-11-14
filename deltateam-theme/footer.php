@@ -32,11 +32,12 @@
 
                 <div class="footer-section">
                     <h3>Connect With Us</h3>
+                    <p style="color: #FFFFFF; margin-bottom: 1rem;">
+                        <strong>Phone:</strong> <a href="tel:07971659666" style="color: #CDDC39;">07971 659 666</a><br>
+                        <strong>Email:</strong> <a href="mailto:info@deltateamthree.co.uk" style="color: #CDDC39;">info@deltateamthree.co.uk</a>
+                    </p>
                     <div class="social-links">
-                        <a href="#" class="social-link" aria-label="Facebook" title="Facebook">F</a>
-                        <a href="#" class="social-link" aria-label="Twitter" title="Twitter">T</a>
-                        <a href="#" class="social-link" aria-label="Instagram" title="Instagram">I</a>
-                        <a href="#" class="social-link" aria-label="YouTube" title="YouTube">Y</a>
+                        <a href="https://www.facebook.com/groups/deltateamthree" target="_blank" class="social-link" aria-label="Facebook" title="Facebook">F</a>
                     </div>
                     <?php if (is_active_sidebar('footer-3')) : ?>
                         <?php dynamic_sidebar('footer-3'); ?>
@@ -60,25 +61,3 @@
 <?php wp_footer(); ?>
 </body>
 </html>
-
-<?php
-// Default footer menu fallback
-function deltateam_footer_default_menu() {
-    echo '<ul>';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/about')) . '">About</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/contact')) . '">Contact</a></li>';
-    echo '</ul>';
-}
-
-// Default primary menu fallback
-function deltateam_default_menu() {
-    echo '<ul id="primary-menu">';
-    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/about')) . '">About</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/game')) . '">Games</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/gallery')) . '">Gallery</a></li>';
-    echo '<li><a href="' . esc_url(home_url('/contact')) . '">Contact</a></li>';
-    echo '</ul>';
-}
-?>

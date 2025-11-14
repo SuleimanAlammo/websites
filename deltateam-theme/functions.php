@@ -339,3 +339,38 @@ function deltateam_body_classes($classes) {
     return $classes;
 }
 add_filter('body_class', 'deltateam_body_classes');
+
+// Default menu fallback
+function deltateam_default_menu() {
+    $menu_items = array(
+        array('url' => home_url('/'), 'title' => 'Home'),
+        array('url' => home_url('/events/'), 'title' => 'Events'),
+        array('url' => home_url('/faq/'), 'title' => 'FAQ'),
+        array('url' => home_url('/rules/'), 'title' => 'Rules'),
+        array('url' => home_url('/contact-us/'), 'title' => 'Contact Us'),
+    );
+
+    echo '<ul id="primary-menu" class="menu">';
+    foreach ($menu_items as $item) {
+        $current = (trailingslashit(home_url(add_query_arg(array()))) == trailingslashit($item['url'])) ? ' class="current-menu-item"' : '';
+        echo '<li' . $current . '><a href="' . esc_url($item['url']) . '">' . esc_html($item['title']) . '</a></li>';
+    }
+    echo '</ul>';
+}
+
+// Default footer menu fallback
+function deltateam_footer_default_menu() {
+    $menu_items = array(
+        array('url' => home_url('/'), 'title' => 'Home'),
+        array('url' => home_url('/events/'), 'title' => 'Events'),
+        array('url' => home_url('/faq/'), 'title' => 'FAQ'),
+        array('url' => home_url('/rules/'), 'title' => 'Rules'),
+        array('url' => home_url('/contact-us/'), 'title' => 'Contact Us'),
+    );
+
+    echo '<ul>';
+    foreach ($menu_items as $item) {
+        echo '<li><a href="' . esc_url($item['url']) . '">' . esc_html($item['title']) . '</a></li>';
+    }
+    echo '</ul>';
+}
