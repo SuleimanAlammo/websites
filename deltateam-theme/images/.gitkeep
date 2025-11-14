@@ -1,0 +1,11 @@
+# Images Directory
+
+Place your theme images here:
+
+- hero-bg.jpg - Hero section background image (recommended: 1920x1080px)
+- logo.png - Team logo (recommended: 400x100px)
+- favicon.ico - Site favicon
+- default-game.jpg - Default game thumbnail
+- team-photos/ - Team and event photos
+
+Images should be optimized for web use (compressed, appropriate size).

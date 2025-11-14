@@ -1,0 +1,28 @@
+# WordPress
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/backups/
+wp-content/upgrade/
+
+# OS Files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# Editor Files
+*.sublime-project
+*.sublime-workspace
+.vscode/
+.idea/
+
+# Logs
+*.log
+error_log
+debug.log
+
+# Temporary Files
+*.tmp
+*.temp
