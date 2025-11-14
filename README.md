@@ -12,11 +12,28 @@ A modern WordPress theme for Delta Team Three airsoft team, featuring a tactical
 - **News & Updates**: Keep members informed with latest updates
 - **Contact Information**: Easy access to team contact details
 
-## Installation
+## Quick Start Options
+
+### Option 1: Docker (Recommended for Local Development)
+
+**For Windows users with Docker Desktop:**
+
+1. Install Docker Desktop: https://www.docker.com/products/docker-desktop/
+2. Open terminal in project directory
+3. Run: `docker-compose up -d` (or double-click `start.bat`)
+4. Open browser to: http://localhost:8000
+5. Complete WordPress installation wizard
+6. Activate the Delta Team Three theme
+
+**See [DOCKER-SETUP.md](DOCKER-SETUP.md) for detailed instructions.**
+
+### Option 2: Traditional WordPress Installation
 
 1. Upload the `deltateam-theme` folder to `/wp-content/themes/` directory
 2. Activate the theme through WordPress admin panel (Appearance > Themes)
 3. Configure theme settings and add your content
+
+**See [INSTALLATION.md](INSTALLATION.md) for detailed instructions.**
 
 ## Theme Structure
 
