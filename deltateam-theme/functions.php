@@ -44,8 +44,14 @@ function deltateam_scripts() {
     // Custom CSS
     wp_enqueue_style('deltateam-custom', get_template_directory_uri() . '/css/custom.css', array(), '2.0');
 
-    // Main JavaScript
+    // Ensure jQuery is loaded
+    wp_enqueue_script('jquery');
+
+    // Main JavaScript with jQuery dependency
     wp_enqueue_script('deltateam-main', get_template_directory_uri() . '/js/main.js', array('jquery'), '2.0', true);
+
+    // Add inline script to verify jQuery is loaded
+    wp_add_inline_script('deltateam-main', 'if(typeof jQuery==="undefined"){console.error("jQuery is not loaded - Delta Team theme may not function properly");}', 'before');
 }
 add_action('wp_enqueue_scripts', 'deltateam_scripts');
 
@@ -153,38 +159,94 @@ function deltateam_save_game_details($post_id) {
         return;
     }
 
-    // Save fields
-    $fields = array(
+    // Validate required fields
+    $errors = array();
+
+    // Game date is required for the next game functionality
+    if (empty($_POST['game_date'])) {
+        $errors[] = 'Game date is required.';
+    } else {
+        // Validate date format
+        $date = $_POST['game_date'];
+        $date_parts = explode('-', $date);
+        if (count($date_parts) !== 3 || !checkdate($date_parts[1], $date_parts[2], $date_parts[0])) {
+            $errors[] = 'Invalid date format.';
+        }
+    }
+
+    // If there are validation errors, add admin notice and prevent save
+    if (!empty($errors)) {
+        set_transient('deltateam_game_save_errors_' . $post_id, $errors, 45);
+        add_filter('redirect_post_location', function($location) use ($errors) {
+            return add_query_arg('deltateam_errors', '1', $location);
+        });
+        return;
+    }
+
+    // Save fields with proper sanitization
+    $text_fields = array(
         'game_date',
         'game_time',
         'game_location',
-        'game_location_address',
         'game_meeting_point',
         'game_cost'
     );
 
-    foreach ($fields as $field) {
+    foreach ($text_fields as $field) {
         if (isset($_POST[$field])) {
             update_post_meta($post_id, '_' . $field, sanitize_text_field($_POST[$field]));
         }
     }
+
+    // Special handling for textarea fields
+    if (isset($_POST['game_location_address'])) {
+        update_post_meta($post_id, '_game_location_address', sanitize_textarea_field($_POST['game_location_address']));
+    }
+
+    // Clear any previous errors
+    delete_transient('deltateam_game_save_errors_' . $post_id);
 }
 add_action('save_post_game', 'deltateam_save_game_details');
+
+// Display admin notices for game save errors
+function deltateam_game_admin_notices() {
+    global $post;
+
+    if (!$post || $post->post_type !== 'game') {
+        return;
+    }
+
+    if (isset($_GET['deltateam_errors'])) {
+        $errors = get_transient('deltateam_game_save_errors_' . $post->ID);
+        if ($errors) {
+            echo '<div class="notice notice-error is-dismissible"><p><strong>Game validation errors:</strong></p><ul>';
+            foreach ($errors as $error) {
+                echo '<li>' . esc_html($error) . '</li>';
+            }
+            echo '</ul></div>';
+            delete_transient('deltateam_game_save_errors_' . $post->ID);
+        }
+    }
+}
+add_action('admin_notices', 'deltateam_game_admin_notices');
 
 // Get next upcoming game
 function deltateam_get_next_game() {
     $args = array(
         'post_type'      => 'game',
         'posts_per_page' => 1,
-        'meta_key'       => '_game_date',
-        'orderby'        => 'meta_value',
-        'order'          => 'ASC',
+        'orderby'        => array('meta_value' => 'ASC'),
         'meta_query'     => array(
+            'relation' => 'AND',
             array(
                 'key'     => '_game_date',
                 'value'   => date('Y-m-d'),
                 'compare' => '>=',
                 'type'    => 'DATE'
+            ),
+            array(
+                'key'     => '_game_date',
+                'compare' => 'EXISTS'
             )
         )
     );
@@ -192,7 +254,9 @@ function deltateam_get_next_game() {
     $query = new WP_Query($args);
 
     if ($query->have_posts()) {
-        return $query->posts[0];
+        $post = $query->posts[0];
+        wp_reset_postdata();
+        return $post;
     }
 
     return null;

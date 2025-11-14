@@ -20,6 +20,19 @@
             }
         });
 
+        // Close mobile menu on window resize to desktop size
+        var resizeTimer;
+        $(window).on('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                // Close menu if window is resized to desktop size (>768px)
+                if ($(window).width() > 768) {
+                    $('#main-navigation').removeClass('active');
+                    $('#menu-toggle').removeClass('active');
+                }
+            }, 250);
+        });
+
         // Smooth scrolling for anchor links
         $('a[href*="#"]').not('[href="#"]').not('[href="#0"]').click(function(event) {
             if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') &&

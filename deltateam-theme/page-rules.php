@@ -42,10 +42,10 @@ get_header();
 
                 <h3 style="color: #CDDC39; margin-top: 1.5rem; margin-bottom: 1rem;">In the safe zone(s):</h3>
                 <ul style="margin-left: 2rem; margin-bottom: 1.5rem; list-style-type: disc;">
-                    <li style="margin-bottom: 0.5rem;">Keep your weapon(s) as dry as possible to prevent trips and damage to players and equipment</li>
+                    <li style="margin-bottom: 0.5rem;">Keep your weapon(s) as dry as possible to prevent rust and damage to equipment</li>
                     <li style="margin-bottom: 0.5rem;">You are responsible for checking your guns fire safely (no damage to any plastic, no personal injury)</li>
                     <li style="margin-bottom: 0.5rem;">The site admin are responsible for fps or damage on any RIFs(so personal injury)</li>
-                    <li style="margin-bottom: 0.5rem;">Do not cut or fire any gun inside the safe/non inside the safe/non inside the play area</li>
+                    <li style="margin-bottom: 0.5rem;">Do not fire any gun inside the safe zone, only inside the play area</li>
                 </ul>
 
                 <h3 style="color: #CDDC39; margin-top: 1.5rem; margin-bottom: 1rem;">Entering the play area from the safe zone</h3>
