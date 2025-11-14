@@ -342,35 +342,54 @@ add_filter('body_class', 'deltateam_body_classes');
 
 // Default menu fallback
 function deltateam_default_menu() {
-    $menu_items = array(
-        array('url' => home_url('/'), 'title' => 'Home'),
-        array('url' => home_url('/events/'), 'title' => 'Events'),
-        array('url' => home_url('/faq/'), 'title' => 'FAQ'),
-        array('url' => home_url('/rules/'), 'title' => 'Rules'),
-        array('url' => home_url('/contact-us/'), 'title' => 'Contact Us'),
+    // Get pages dynamically by slug
+    $pages = array(
+        'events' => 'Events',
+        'faq' => 'FAQ',
+        'rules' => 'Rules',
+        'contact-us' => 'Contact Us',
     );
 
     echo '<ul id="primary-menu" class="menu">';
-    foreach ($menu_items as $item) {
-        $current = (trailingslashit(home_url(add_query_arg(array()))) == trailingslashit($item['url'])) ? ' class="current-menu-item"' : '';
-        echo '<li' . $current . '><a href="' . esc_url($item['url']) . '">' . esc_html($item['title']) . '</a></li>';
+
+    // Home link
+    $current = is_front_page() ? ' class="current-menu-item"' : '';
+    echo '<li' . $current . '><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
+
+    // Dynamic page links
+    foreach ($pages as $slug => $title) {
+        $page = get_page_by_path($slug);
+        if ($page) {
+            $current = is_page($page->ID) ? ' class="current-menu-item"' : '';
+            echo '<li' . $current . '><a href="' . esc_url(get_permalink($page->ID)) . '">' . esc_html($title) . '</a></li>';
+        }
     }
+
     echo '</ul>';
 }
 
 // Default footer menu fallback
 function deltateam_footer_default_menu() {
-    $menu_items = array(
-        array('url' => home_url('/'), 'title' => 'Home'),
-        array('url' => home_url('/events/'), 'title' => 'Events'),
-        array('url' => home_url('/faq/'), 'title' => 'FAQ'),
-        array('url' => home_url('/rules/'), 'title' => 'Rules'),
-        array('url' => home_url('/contact-us/'), 'title' => 'Contact Us'),
+    // Get pages dynamically by slug
+    $pages = array(
+        'events' => 'Events',
+        'faq' => 'FAQ',
+        'rules' => 'Rules',
+        'contact-us' => 'Contact Us',
     );
 
     echo '<ul>';
-    foreach ($menu_items as $item) {
-        echo '<li><a href="' . esc_url($item['url']) . '">' . esc_html($item['title']) . '</a></li>';
+
+    // Home link
+    echo '<li><a href="' . esc_url(home_url('/')) . '">Home</a></li>';
+
+    // Dynamic page links
+    foreach ($pages as $slug => $title) {
+        $page = get_page_by_path($slug);
+        if ($page) {
+            echo '<li><a href="' . esc_url(get_permalink($page->ID)) . '">' . esc_html($title) . '</a></li>';
+        }
     }
+
     echo '</ul>';
 }
