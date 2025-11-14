@@ -21,21 +21,30 @@ Text Domain: deltateam
 }
 
 :root {
-    --primary-color: #1a4d2e;
-    --secondary-color: #4f6f52;
-    --accent-color: #8b0000;
-    --dark-bg: #0d0d0d;
-    --light-bg: #1a1a1a;
-    --text-light: #e0e0e0;
+    --primary-color: #4CAF50;
+    --secondary-color: #8BC34A;
+    --accent-color: #CDDC39;
+    --dark-bg: #000000;
+    --light-bg: #0a0a0a;
+    --text-light: #CDDC39;
     --text-dark: #333;
-    --border-color: #333;
-    --success-color: #28a745;
-    --warning-color: #ffc107;
+    --border-color: #4CAF50;
+    --success-color: #8BC34A;
+    --warning-color: #FFEB3B;
+    --camo-green: #3d5a3d;
+    --highlight-yellow: #FFEB3B;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--dark-bg);
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(61, 90, 61, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(76, 175, 80, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(46, 125, 50, 0.25) 0%, transparent 50%),
+        radial-gradient(circle at 90% 30%, rgba(51, 105, 30, 0.2) 0%, transparent 50%),
+        linear-gradient(135deg, #1a2e1a 0%, #0a1a0a 50%, #000000 100%);
+    background-attachment: fixed;
     color: var(--text-light);
     line-height: 1.6;
     font-size: 16px;
@@ -99,13 +108,13 @@ main {
    =========================== */
 
 .site-header {
-    background: linear-gradient(135deg, var(--dark-bg) 0%, var(--light-bg) 100%);
-    border-bottom: 3px solid var(--accent-color);
-    padding: 1rem 0;
+    background: linear-gradient(135deg, #2d4a2d 0%, #1a2e1a 100%);
+    border-bottom: 2px solid var(--primary-color);
+    padding: 0.5rem 0;
     position: sticky;
     top: 0;
     z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .header-content {
@@ -156,20 +165,21 @@ main {
 }
 
 .main-navigation a {
-    color: var(--text-light);
+    color: #FFFFFF;
     font-weight: bold;
     text-transform: uppercase;
     padding: 0.5rem 1rem;
     border: 2px solid transparent;
     transition: all 0.3s ease;
     display: block;
+    font-size: 14px;
 }
 
 .main-navigation a:hover,
 .main-navigation .current-menu-item a {
     color: var(--accent-color);
-    border-color: var(--accent-color);
-    background: rgba(139, 0, 0, 0.1);
+    border-color: var(--primary-color);
+    background: rgba(76, 175, 80, 0.2);
 }
 
 /* Mobile Menu Toggle */

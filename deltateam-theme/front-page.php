@@ -12,9 +12,29 @@ get_header();
 <section class="hero-section">
     <div class="container">
         <div class="hero-content">
-            <h1>Delta Team Three</h1>
-            <p>Elite Airsoft Operations</p>
-            <a href="#next-game" class="btn">View Next Game</a>
+            <h1 style="color: #CDDC39;">Welcome to Delta Team 3</h1>
+            <?php if (has_post_thumbnail()) : ?>
+                <div class="team-photo" style="margin: 2rem 0;">
+                    <?php the_post_thumbnail('large', array('style' => 'max-width: 100%; height: auto; border: 3px solid #4CAF50;')); ?>
+                </div>
+            <?php endif; ?>
+            <div style="max-width: 900px; margin: 0 auto; text-align: left; color: #FFFFFF;">
+                <p>
+                    As an Airsoft site we are <strong>fully insured and have</strong> <span style="color: #CDDC39;">UKARA</span> <strong>registration</strong> (Black Ops Solutions DTT).
+                </p>
+                <p>
+                    <span style="color: #CDDC39;">Since June 2009</span> we have operated a Woodland site, which is roughly <span style="color: #CDDC39;">30 acres</span> in size, with a number of game areas and varying scenarios. Typically we have at least <span style="color: #CDDC39;">two</span> Sunday games each month, all year round, as well as midweek, but unless it is a recommended event you play it free (fair games, bollock attempting a night event).
+                </p>
+                <p>
+                    The site is operated by genuine ex-military personnel, who have many years accumulated service and experience. Browse our Web site for more information about Delta Team 3. If you have any questions, that are not covered on the website, or would like to speak with a Delta Team 3 representative regarding our events or to book a private event, please e-mail us at <a href="mailto:info@deltateamthree.co.uk" style="color: #CDDC39;">info@deltateamthree.co.uk</a> or call us <span style="color: #CDDC39;">07971 659 666</span>.
+                </p>
+                <p style="color: #FF6B6B; font-weight: bold;">
+                    At Delta Team 3, the players always come first.
+                </p>
+                <p>
+                    We are pleased to send <span style="color: #CDDC39;">Humanitarian aid</span> to Ukraine, please visit our <a href="<?php echo esc_url(home_url('/guest-forms')); ?>" style="color: #CDDC39;">guest forms</a> page <a href="<?php echo esc_url(home_url('/guest-forms')); ?>" style="color: #CDDC39;">HERE</a>.
+                </p>
+            </div>
         </div>
     </div>
 </section>
@@ -36,8 +56,7 @@ get_header();
 
         <div class="next-game-container">
             <div class="next-game-header">
-                <span class="next-game-icon">🎯</span>
-                <h2 class="next-game-title">Next Mission: <?php echo esc_html($next_game->post_title); ?></h2>
+                <h2 class="next-game-title" style="color: #CDDC39; text-align: center;">Next Game - <?php echo deltateam_format_game_date($game_date); ?></h2>
             </div>
 
             <div class="game-details">
